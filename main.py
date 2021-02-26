@@ -15,9 +15,10 @@ def query():
     #getting query from the HTML form
     query = request.form['query']
     if query:
-        result, filenames, documents_content = VSM.do_search(query)
-        if len(result) !=0:
-            return render_template('dictionary.html',res  = result, fnames= filenames,content=documents_content, num= len(result))
+        result = VSM.do_search(query)
+        documents_content = VSM.documents_content
+        if result !=0:
+            return render_template('dictionary.html',res = result,content=documents_content, num= len(result))
         else: return render_template('tryAgain.html')
     else : return render_template('index.html')
 if __name__ == '__main__':

@@ -41,16 +41,18 @@
             </div>
             <div class="modal-body">
               <h2>from the most to the least relevant..</h2>
- {%for id, sim in res %}
-    <div class="container" >
-      <h4 style="color: black;">⚫ {%print(fnames[id])%}</h4>
-      <h4 style="color: black;">cosine similarity ➙ {%print(sim|string())%}</h4>
-        <details style="width: 40%; color: black;" >
-         <summary style=" color: blue;">Do you want to read document?</summary>
-          <p>{%print(content[id])%}</p>
-        </details>
-    </div>
-{% endfor %}
+{%if scores != 0:%}
+        {%for fileName, score in res.items():%}
+            <div class="container" >
+              <h4 style="color: black;">⚫ {%print(fileName)%}</h4>
+              <h4 style="color: black;">cosine similarity ➙ {%print(score|string())%}</h4>
+                <details style="width: 40%; color: black;" >
+                 <summary style=" color: blue;">Do you want to read document?</summary>
+                  <p>{%print(content[fileName])%}</p>
+                </details>
+            </div>
+        {% endfor %}
+{%endif%}
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
