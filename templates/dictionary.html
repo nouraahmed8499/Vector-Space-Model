@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>VECTOR SPACE MODEL</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="s006">
+      <form method="POST" action="{{url_for('query')}}" class="searchbar">
+        <fieldset>
+          <legend>VECTOR SPACE MODEL</legend>
+          <div class="inner-form">
+            <div class="input-field">
+                <button class="btn-search" type="submit">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                  </svg>
+                 </button>
+                 <input id="search" type="text" placeholder="Please enter query" name="query" />
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+    <div class="container" style="background-color: rgba(255,255,255,0.5); border-radius:20px; width: 40%;">
+       <h1 style="color: whtie;"> {{num}} document/s retrieved</h1>
+      <!-- Trigger the modal with a button -->
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">See reuslt!</button>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 style="color: whtie;"> {{num}} document/s retrieved</h3>
+            </div>
+            <div class="modal-body">
+              <h2>from the most to the least relevant..</h2>
+{%if scores != 0:%}
+        {%for fileName, score in res.items():%}
+            <div class="container" >
+              <h4 style="color: black;">⚫ {%print(fileName)%}</h4>
+              <h4 style="color: black;">cosine similarity ➙ {%print(score|string())%}</h4>
+                <details style="width: 40%; color: black;" >
+                 <summary style=" color: blue;">Do you want to read document?</summary>
+                  <p>{%print(content[fileName])%}</p>
+                </details>
+            </div>
+        {% endfor %}
+{%endif%}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
