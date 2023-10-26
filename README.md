@@ -3,7 +3,7 @@ This is a small search engine that takes a query from the user as an input and s
 I used nltk library and applied the vector space model to retrieve documents and the cosine similarity between query and each retrieved document. 
 then I showed the output using Flask and HTML pages.
 
-## How it works?
+## Project Structure
 ### Files
 #### main.py
 create flask instance, which is then used to run the application.
